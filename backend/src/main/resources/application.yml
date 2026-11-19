@@ -1,0 +1,36 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: expense-manager
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/expenses}
+    username: ${DB_USER:expenses}
+    password: ${DB_PASSWORD:expenses}
+    hikari:
+      data-source-properties:
+        reWriteBatchedInserts: true   # pgjdbc turns a JDBC batch of INSERTs into multi-row INSERTs
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate          # schema is owned by Flyway, Hibernate only validates it
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 100         # CSV imports are inserted in batches (needs the pooled expense id sequence)
+        order_inserts: true
+        order_updates: true
+  flyway:
+    enabled: true
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+app:
+  anomaly:
+    multiplier: 3.0               # flag when amount > multiplier x average of the other expenses in the category
+    min-peers: 2                  # need at least this many OTHER expenses in a category before judging
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173}

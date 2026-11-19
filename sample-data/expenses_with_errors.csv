@@ -1,0 +1,9 @@
+Date,Amount,Vendor Name,Notes
+18/11/2026,"₹1,250",Swiggy,"Dinner, with friends"
+2026-11-17,abc,Zomato,Amount is not a number
+2026-02-30,500,Uber,Impossible date
+2026-11-16,-200,Ola,Negative amount
+2026-11-15,300,,Missing vendor
+2031-01-01,900,Amazon,Future date
+2026-11-15,99.999,Spotify,Too many decimals
+17 Nov 2026,Rs. 450,Blinkit,Valid - alternate date and amount formats
